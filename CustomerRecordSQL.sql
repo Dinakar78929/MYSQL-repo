@@ -104,23 +104,27 @@ drop table customerRecords;
 select * from customerRecords;
 
 -- count all records
-SELECT count(*) 
+SELECT count(*) as  total 
 FROM customerRecords; 
 -- find total cost in each month & for 3 months
-SELECT SUM(cost)
+SELECT SUM(cost) as totalAmount
 from customerRecords
 where receivedDate between '2022-04-01' and '2022-04-30';
 
 -- find average cost in each month & for 3 months
-SELECT AVG(cost)
+SELECT monthname(receivedDate) as month ,AVG(cost) as AverageAmount
 from customerRecords
 where receivedDate between '2022-04-01' and '2022-04-30';
 
+SELECT monthname(receivedDate) as month ,AVG(cost) as AverageAmount
+from customerRecords
+where receivedDate between '2022-05-01' and '2022-05-30';
+
 --  find Heighest & cost from 3 months 
-SELECT MAX(cost)
+SELECT monthname(receivedDate) as month,MAX(cost) as highest
 from customerRecords;
 -- --  find lowest & cost from 3 months 
-SELECT MIN(cost)
+SELECT monthname(receivedDate) as month,MIN(cost) as lowest
 from customerRecords;
 
 -- find customers whose name starts with a
@@ -140,6 +144,12 @@ customerRecords.maintenanceDays ,
 customerRecords.mechanicName,
 customerRecords.mechanicPhone ,
 customerRecords.cost ,
+serviceStation.serviceType
+from customerRecords
+join serviceStation
+on customerRecords.serviceTypeId=serviceStation.sNo;
+
+select customerRecords.* ,
 serviceStation.serviceType
 from customerRecords
 join serviceStation
