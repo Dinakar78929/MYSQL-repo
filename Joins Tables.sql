@@ -42,6 +42,11 @@ insert into details(branch_name,address)
  
  select * from employee;
  
+  select employee.emp_id,employee.emp_name,employee.emp_job,details.branch_name
+ from employee
+join details
+ on employee.branch_id=details.branch_id
+ order by employee.emp_id;
  
  -- Inner Join
  select employee.emp_id,employee.emp_name,employee.emp_job,details.branch_name
